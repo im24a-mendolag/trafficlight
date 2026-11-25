@@ -1,0 +1,33 @@
+// Exercise 5: the commit pipeline of exercise 4, stored in the repository.
+//
+// The Checkout stage is gone on purpose: Jenkins must check the repository out
+// first in order to read this file at all, so by the time the pipeline runs the
+// sources are already in the workspace.
+//
+// Used by a Pipeline job configured as:
+//   Definition      = Pipeline script from SCM
+//   SCM             = Git
+//   Repository URL  = https://github.com/<user>/trafficlight.git
+//   Branch          = */main
+//   Script Path     = Jenkinsfile1
+pipeline {
+    agent any
+    tools { nodejs 'node22' }
+    stages {
+        stage('Install') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'npm test'
+            }
+        }
+    }
+    post {
+        always {
+            echo "Commit pipeline finished with status: ${currentBuild.currentResult}"
+        }
+    }
+}
