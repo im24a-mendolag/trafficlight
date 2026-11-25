@@ -7,7 +7,7 @@
 // Used by a Pipeline job configured as:
 //   Definition      = Pipeline script from SCM
 //   SCM             = Git
-//   Repository URL  = https://github.com/<user>/trafficlight.git
+//   Repository URL  = https://github.com/im24a-mendolag/trafficlight.git
 //   Branch          = */main
 //   Script Path     = Jenkinsfile1
 pipeline {
